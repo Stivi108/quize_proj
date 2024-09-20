@@ -1,0 +1,26 @@
+
+{% extends 'base/home.html' %}
+{% block content %}
+    <div class="container mt-2">
+        <div class="row ">
+    <h3>Игра: {{ gameName }}</h3>
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+    <hr>
+    <h3>Состав игры</h3>
+    <hr>
+    <ul>
+        {% for round, question in roundList.items %}
+            <li><strong>Раунд {{ round }}:</strong> {{ question }}</li>
+        {% empty %}
+            <li>Нет раундов для этой игры.</li>
+        {% endfor %}
+    </ul>
+        </div>
+    </div>
+{% endblock %}
+

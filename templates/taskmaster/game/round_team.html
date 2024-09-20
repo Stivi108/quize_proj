@@ -1,0 +1,38 @@
+{% extends 'base/home.html' %}
+
+{% block content %}
+    <hr>
+
+
+    <div class="container mt-2">
+        <div class="row ">
+            <div class="col-md-8">
+                <div class="question-section">
+                    <h1>Раунд {{ Round }}! Внимание, вопрос!</h1>
+                    <h1>{{ questTitle }}</h1>
+                    <p>{{ question }}</p>
+                    <hr>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+
+                    {% if success %}
+                        <p style="color: green;">{{ success }}</p>
+                    {% endif %}
+                    {% if error %}
+                        <p style="color: red;">{{ error }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="chat-section">
+                    <h2>Чат команды {{ team }}</h2>
+                    {% include 'chat/room.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

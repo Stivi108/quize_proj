@@ -1,0 +1,14 @@
+{% extends 'base/home.html' %}
+
+{% block content %}
+    <div class="container mt-2">
+        <div class="row ">
+    <form method="POST">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit">Зарегистрировать</button>
+    </form>
+        </div>
+    </div>
+{% endblock %}

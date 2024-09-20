@@ -1,0 +1,31 @@
+{% extends 'base/home.html' %}
+
+
+{% block content %}
+    <div class="container mt-2">
+    <div class="row">
+{% for game in games %}
+            <div class="col-md-4">
+                <div class="card mt-3">
+                    <img src="{{ game.id }}" class="card-img-top" alt="{{ game.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ game.gameNAME }}</h5>
+                        <p class="card-text">Победитель: {{ game.winner }}</p>
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'taskmaster:detail' game.RLSlug %}" class="btn btn-primary">Посмотреть cчёт</a>
+                            <a href="{% url 'taskmaster:lobby' game.RLSlug %}" class="btn btn-primary">Принять учестие</a>
+                        {% else %}
+                             <a href="{% url 'taskmaster:detail' game.RLSlug %}" class="btn btn-primary">Посмотреть cчёт</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-md-12">
+                <p>Нет доступных игр.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

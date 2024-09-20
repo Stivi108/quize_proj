@@ -1,0 +1,26 @@
+{% extends 'base/home.html' %}
+
+
+{% block content %}
+    <div class="container mt-2">
+        <div class="row">
+
+            <div class="col-sm-4">
+                <h3>игра: {{ game.gameNAME }} </h3>
+                <h4>Победитель: {{ game.winner }}</h4>
+                {% if gameScore %}
+                {% for score in gameScore %}
+                    <p> {{ score.team }}, {{ score }}</p>
+                {% endfor %}
+                {% else %}
+                {% for team in teams %}
+                    <p> {{ team.team }}, Счет: {{ team.mark }}</p>
+                {% endfor %}
+                {% endif %}
+
+                <a href="{% url 'taskMaster:lobby' game_slug=game.RLSlug %}" class="btn btn-primary btn-lg">Вступить в игру</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
